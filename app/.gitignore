@@ -1,0 +1,14 @@
+.DS_Store
+bin
+gen
+build
+.gradle/
+local.properties
+.idea/
+!.idea/scopes/
+!.idea/scopes/*
+.idea/modules.xml
+.idea/workspace.xml
+.idea/misc.xml
+*.iml
+gradle_build.log

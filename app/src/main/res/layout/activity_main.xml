@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.docwei.myviewdemo.scroll.MyOriginalView
+        android:id="@+id/myview"
+        android:layout_width="match_parent"
+        android:layout_height="240dp" />
+
+    <com.docwei.myviewdemo.scroll.MyView
+        android:id="@+id/myview1"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="240dp" />
+
+    <com.docwei.myviewdemo.scroll.MyMultiView
+        android:id="@+id/myview2"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="240dp" />
+    <Button
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="进入涂鸦"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/white"
+        android:background="#78DD7C"
+        android:onClick="draw"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
