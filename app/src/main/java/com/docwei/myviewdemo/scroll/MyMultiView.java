@@ -39,6 +39,9 @@ public class MyMultiView extends ViewGroup {
         mVelocityTracker.addMovement(event);
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
+                if (!mScroller.isFinished()) {
+                    mScroller.abortAnimation();
+                }
             case MotionEvent.ACTION_POINTER_DOWN:
                 //第一次按下或者后续按下，都将其作为活动的手指
                 activePointer = event.getPointerId(actionIndex);
@@ -46,15 +49,26 @@ public class MyMultiView extends ViewGroup {
                 mLastX = event.getX(pointerIndex);
                 break;
             case MotionEvent.ACTION_MOVE:
-                float x = event.getX(event.findPointerIndex(activePointer));
-                scrollBy(-(int) (x - mLastX) / 3, 0);
-                mLastX = x;
+                for (int i = 0; i < event.getPointerCount(); i++) {
+                    if (event.getPointerId(i) == activePointer) {
+                        float x = event.getX(event.findPointerIndex(activePointer));
+                        scrollBy(-(int) (x - mLastX) / 3, 0);
+                        mLastX = x;
+                    }
+                }
                 break;
             case MotionEvent.ACTION_POINTER_UP:
                 //如果抬起的手指是活动的手指，那么就要更新活动的手指
                 if (event.getPointerId(actionIndex) == activePointer && event.getPointerCount() > 1) {
                     //如果当前的点是0，就选择1，因为至少有一个手指在View上 ,actionIndex存在补位机制
-                    activePointer = event.getPointerId((actionIndex == 0) ? 1 : 0);
+
+                    int newIndex;
+                    if (actionIndex == event.getPointerCount() - 1) {
+                        newIndex = event.getPointerCount() - 2;
+                    } else {
+                        newIndex = event.getPointerCount() - 1;
+                    }
+                    activePointer = event.getPointerId( newIndex);
                     final int newPointerIndex = event.findPointerIndex(activePointer);
                     //pointerIndex out of range
                     mLastX = event.getX(newPointerIndex);
@@ -93,6 +107,7 @@ public class MyMultiView extends ViewGroup {
                 }
                 //右滑当速度达到200，此时如果index的float
                 startSmoothScrool(scrollX, index * mChildWidth - scrollX);
+                mVelocityTracker.clear();
                 break;
             default:
                 break;
@@ -133,7 +148,7 @@ public class MyMultiView extends ViewGroup {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             if (child.getVisibility() != View.GONE) {
-                mChildWidth = getMeasuredWidth();
+                mChildWidth = child.getMeasuredWidth();
                 child.layout(childWidth + getPaddingLeft(), getPaddingTop(), childWidth + mChildWidth - getPaddingRight(), bottom - getPaddingBottom() - top);
                 childWidth += child.getMeasuredWidth();
             }

@@ -83,7 +83,7 @@ public class MyOriginalView extends ViewGroup {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             if (child.getVisibility() != View.GONE) {
-                mChildWidth = getMeasuredWidth();
+                mChildWidth = child.getMeasuredWidth();
                 child.layout(childWidth + getPaddingLeft(),  getPaddingTop(), childWidth + mChildWidth- getPaddingRight(), bottom - getPaddingBottom()-top);
                 childWidth += child.getMeasuredWidth();
             }

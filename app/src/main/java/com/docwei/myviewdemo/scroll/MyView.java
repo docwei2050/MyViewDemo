@@ -40,6 +40,9 @@ public class MyView extends ViewGroup {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 //最初down时要保存到
+                if (!mScroller.isFinished()) {
+                    mScroller.abortAnimation();
+                }
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
                 break;
@@ -78,6 +81,7 @@ public class MyView extends ViewGroup {
                 }
                 //右滑当速度达到200，此时如果index的float
                 startSmoothScrool(scrollX, index * mChildWidth - scrollX);
+                mVelocityTracker.clear();
                 break;
             default:
                 break;
@@ -118,7 +122,7 @@ public class MyView extends ViewGroup {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             if (child.getVisibility() != View.GONE) {
-                mChildWidth = getMeasuredWidth();
+                mChildWidth = child.getMeasuredWidth();
                 child.layout(childWidth + getPaddingLeft(),  getPaddingTop(), childWidth + mChildWidth- getPaddingRight(), bottom - getPaddingBottom()-top);
                 childWidth += child.getMeasuredWidth();
             }
