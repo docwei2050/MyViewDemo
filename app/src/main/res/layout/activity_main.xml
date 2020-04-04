@@ -8,20 +8,24 @@
 
     <com.docwei.myviewdemo.scroll.MyOriginalView
         android:id="@+id/myview"
+        android:layout_weight="1"
+        android:layout_height="0dp"
         android:layout_width="match_parent"
-        android:layout_height="240dp" />
+      />
 
     <com.docwei.myviewdemo.scroll.MyView
         android:id="@+id/myview1"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="240dp" />
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
 
     <com.docwei.myviewdemo.scroll.MyMultiView
         android:id="@+id/myview2"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="240dp" />
+        android:layout_weight="1"
+        android:layout_height="0dp" />
     <Button
         android:layout_width="match_parent"
         android:gravity="center"

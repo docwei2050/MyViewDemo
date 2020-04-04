@@ -38,7 +38,7 @@ public class MyOriginalView extends ViewGroup {
             case MotionEvent.ACTION_POINTER_DOWN:
                 break;
             case MotionEvent.ACTION_MOVE:
-                //除以3是为了增加阻力f
+                //)*0.85是为了增加阻力f
                 scrollBy(-(int) ((x - mLastX)*0.85f), 0);
                 break;
             case MotionEvent.ACTION_UP:
