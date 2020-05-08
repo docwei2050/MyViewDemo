@@ -133,7 +133,6 @@ public class MyMultiView extends ViewGroup {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-        int mode = MeasureSpec.getMode(widthMeasureSpec);
         //如果父控件width是At_most测量会显示不出来
         measureChildren(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(width, height);
@@ -145,7 +144,7 @@ public class MyMultiView extends ViewGroup {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         int childWidth = 0;
         mChildCount = getChildCount();
-        for (int i = 0; i < getChildCount(); i++) {
+        for (int i = 0; i < mChildCount; i++) {
             View child = getChildAt(i);
             if (child.getVisibility() != View.GONE) {
                 mChildWidth = child.getMeasuredWidth();
